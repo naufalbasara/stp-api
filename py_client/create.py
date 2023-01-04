@@ -28,8 +28,9 @@ data = {
     'rear_tire': 'wheel',
     'front_suspension': 'wheel',
     'rear_suspension': 'wheel',
-    'front_break': 'wheel',
-    'rear_break': 'wheel',
+    'front_brake': 'pop',
+    'rear_brake': 'pop',
+    'production_year': '2020-01-01',
     'price': 129
 }
 get_req = requests.post(endpoint, json=data)

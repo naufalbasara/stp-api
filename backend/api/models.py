@@ -49,6 +49,7 @@ class Product(models.Model):
     battery_id = models.ForeignKey(ProductBattery, on_delete=models.CASCADE, null=True)
     dimension_id = models.ForeignKey(ProductDimension, on_delete=models.CASCADE, null=True)
     performance_id = models.ForeignKey(ProductPerformance, on_delete=models.CASCADE, null=True)
+    component_id = models.ForeignKey(ProductComponent, on_delete=models.CASCADE, null=True)
     category = models.TextField(max_length=45, null=True)
     production_year = models.DateField(null=True)
     price = models.DecimalField(max_digits=15, decimal_places=2, default=0.0)
