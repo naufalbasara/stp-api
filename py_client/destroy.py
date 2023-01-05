@@ -1,12 +1,13 @@
 import requests
 
 pk = input("Input product id that you want to delete: ")
-while pk != int(pk):
-    pk = input("Input valid product id that you want to delete: ")
-    if pk == int(pk):
-        pk = int(pk)
-        break
+try:
+    pk = int(pk)
+except:
+    print('input the correct number id!')
+    pk=None
 
-endpoint = "http://localhost:8000/api/products/1/delete"
-get_req = requests.get(endpoint)
-print(get_req.json())
+if pk:
+    endpoint = f"http://localhost:8000/api/products/{pk}/delete"
+    get_req = requests.delete(endpoint)
+    print(get_req.status_code)

@@ -2,14 +2,14 @@ import requests
 
 endpoint = "http://localhost:8000/api/products/"
 data = {
-    'name': 'e-bike',
-    'product_class': 'Motorcycle',
-    'style': 'wkwk',
-    'layout': 'chassis',
-    'frame': 'motor',
-    'length': '129.00',
-    'width': '139.00',
-    'height': '90.00',
+    'name': 'e-mobile',
+    'product_class': 'Bus',
+    'style': 'Vectors',
+    'layout': 'Vectors',
+    'frame': 'SUV Bus',
+    'length': '300.00',
+    'width': '130.00',
+    'height': '120.00',
     'wheelbase': '90.12',
     'weight': '50.12',
     'battery_capacity': '100V',
