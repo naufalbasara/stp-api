@@ -7,7 +7,12 @@ from rest_framework.response import Response
 from rest_framework import generics
 
 from .models import Product,ProductBody,ProductBattery,ProductDimension,ProductPerformance,ProductComponent
-from .serializers import ProductBodySerializer, ProductDimensionSerializer, ProductBatterySerializer, ProductPerformanceSerializer, ProductComponentSerializer, ProductSerializer, CombinedSerializer
+from .serializers import ProductBodySerializer, ProductDimensionSerializer, ProductBatterySerializer, ProductPerformanceSerializer, ProductComponentSerializer, ProductSerializer, CombinedSerializer, MyTokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+class MyObtainTokenPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
 
 #get detail, update, and destroy product
 class ProductDetailUpdateAPIView(generics.RetrieveUpdateDestroyAPIView):
