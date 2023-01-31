@@ -106,6 +106,9 @@ def alt_product(request, pk=None, *args, **kwargs):
         product_data['performance_id'] = ids['id_4']
         product_data['component_id'] = ids['id_5']
         product_data['category'] = request.data['category']
+        product_data['image_1'] = request.data['image_1']
+        product_data['image_2'] = request.data['image_2']
+        product_data['image_3'] = request.data['image_3']
         product_data['production_year'] = request.data['production_year']
         product_data['price'] = request.data['price']
 

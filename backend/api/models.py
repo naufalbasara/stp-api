@@ -1,6 +1,9 @@
 from django.db import models
 import datetime as date
 
+def upload_to(instance, filename):
+    return 'images/{filename}'.format(filename=filename)
+
 # Create your models here.
 class User(models.Model):
     name = models.TextField(max_length=45)
@@ -50,6 +53,9 @@ class Product(models.Model):
     dimension_id = models.ForeignKey(ProductDimension, on_delete=models.CASCADE, null=True)
     performance_id = models.ForeignKey(ProductPerformance, on_delete=models.CASCADE, null=True)
     component_id = models.ForeignKey(ProductComponent, on_delete=models.CASCADE, null=True)
+    image_1 = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    image_2 = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    image_3 = models.ImageField(upload_to=upload_to, blank=True, null=True)
     category = models.TextField(max_length=45, null=True)
     production_year = models.DateField(null=True)
     price = models.DecimalField(max_digits=15, decimal_places=2, default=0.0)

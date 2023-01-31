@@ -27,10 +27,16 @@ class ProductComponentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProductSerializer(serializers.ModelSerializer):
+    image_1 = serializers.ImageField(required=False)
+    image_2 = serializers.ImageField(required=False)
+    image_3 = serializers.ImageField(required=False)
 
     class Meta:
         model = Product
-        fields = ('id', 'name', 'lastEditedBy', 'body_id', 'battery_id', 'dimension_id', 'performance_id', 'component_id', 'category', 'production_year', 'price')
+        fields = (
+            'id', 'name', 'lastEditedBy', 'body_id', 'battery_id', 'dimension_id',
+            'performance_id', 'component_id', 'image_1', 'image_2', 'image_3',
+            'category', 'production_year', 'price')
         depth = 1
 
 
