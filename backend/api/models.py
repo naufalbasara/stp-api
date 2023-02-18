@@ -1,13 +1,20 @@
 from django.db import models
 import datetime as date
+from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 def upload_to(instance, filename):
     return 'images/{filename}'.format(filename=filename)
 
 # Create your models here.
-class User(models.Model):
-    name = models.TextField(max_length=45)
-    username = models.TextField(max_length=15)
+class User(AbstractUser):
+    username = models.TextField(max_length=15, blank=False)
+    email = models.EmailField(max_length=254, blank=False)
+    password= models.TextField(max_length=20, blank=False)
+
+    USERNAME_FIELD = ('username')
+    EMAIL_FIELD = ('email')
+    REQUIRED_FIELDS = ('username', 'email', 'password')
 
 class ProductBody(models.Model):
     product_class = models.TextField(max_length=45)

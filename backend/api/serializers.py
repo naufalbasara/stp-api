@@ -1,5 +1,21 @@
 from rest_framework import serializers
-from .models import User, Product, ProductBody, ProductDimension, ProductBattery, ProductPerformance, ProductComponent
+from .models import  Product, ProductBody, ProductDimension, ProductBattery, ProductPerformance, ProductComponent
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.contrib.auth import get_user_model
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ('username', 'email', 'password')
+
+# class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+#     @classmethod
+#     def get_token(cls, user):
+#         token = super(MyTokenObtainPairSerializer, cls).get_token(user)      
+#         token['detail'] = 'success'
+#         token['username'] = user.username
+#         return token
 
 class ProductBodySerializer(serializers.ModelSerializer):
     class Meta:

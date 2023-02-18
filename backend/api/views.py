@@ -2,12 +2,32 @@ import json
 from django.forms.models import model_to_dict
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from rest_framework import generics
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from .models import Product,ProductBody,ProductBattery,ProductDimension,ProductPerformance,ProductComponent
-from .serializers import ProductBodySerializer, ProductDimensionSerializer, ProductBatterySerializer, ProductPerformanceSerializer, ProductComponentSerializer, ProductSerializer, CombinedSerializer
+from .serializers import ProductBodySerializer, ProductDimensionSerializer, ProductBatterySerializer, ProductPerformanceSerializer, ProductComponentSerializer, ProductSerializer, CombinedSerializer, UserSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+from django.contrib.auth.models import User
+
+class RegisterUser(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def perform_create(self, serializer):
+        
+        if serializer.is_valid():
+            instance = serializer.save()
+            return Response({"Status": 201, "detail": "berhasil", "data": serializer.data})    
+
+class UserAPIView(generics.RetrieveAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user
 
 #get detail, update, and destroy product
 class ProductDetailUpdateAPIView(generics.RetrieveUpdateDestroyAPIView):
@@ -27,6 +47,7 @@ class ProductDetailUpdateAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 #get list and create products
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def alt_product(request, pk=None, *args, **kwargs):
     method = request.method
 
